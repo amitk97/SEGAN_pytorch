@@ -91,9 +91,6 @@ class SEGAN(Model):
         super(SEGAN, self).__init__(name)
         self.save_path = opts.save_path
         self.preemph = opts.preemph
-        # self.reg_loss = getattr(F, opts.l1_loss)
-        # self.reg_loss = False
-        # todo: commendted next line. two upper comments are mine
         # self.reg_loss = getattr(F, opts.reg_loss)
         if generator is None:
             # Build G and D
@@ -332,9 +329,8 @@ class SEGAN(Model):
                 lab = label.fill_(1)
                 d_fake_, _ = self.infer_D(Genh, noisy)
                 g_adv_loss = criterion(d_fake_.view(-1), lab)
-                g_l1_loss = l1_weight * F.l1_loss(Genh, clean)
-                # todo: uncommented line above and commented on below
-                # g_l1_loss = l1_weight * self.reg_loss(Genh, clean)
+                # g_l1_loss = l1_weight * F.l1_loss(Genh, clean)
+                g_l1_loss = l1_weight * self.reg_loss(Genh, clean)
                 g_loss = g_adv_loss + g_l1_loss
                 g_loss.backward()
                 Gopt.step()
