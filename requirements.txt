@@ -1,6 +1,7 @@
 librosa==0.6.3
 pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-
+pydub==0.23.1
+ffmpeg_python==0.2.0-py3-none-any.whl
 torch==1.4.0+cpu
 torchvision==0.5.0+cpu
 six==1.12.0
